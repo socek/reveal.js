@@ -57,10 +57,10 @@
 				</section>
 
                 <section>
-                    <h2>To jest prezentacja typu AGILE</h2>
+                    <h2>To jest prezentacja typu <strong style="color: green;">AGILE</strong></h2>
                     <ul>
-                        <li>Jak masz pytanie - przerywaj i pytaj od razu</li>
-                        <li>Jak dyskusja będzie zbyt długa - przerwę ją i wrócę do niej po zakończeniu prezentacji</li>
+                        <li>Jeśli masz pytanie - przerywaj i pytaj od razu</li>
+                        <li>Jeśli dyskusja będzie zbyt długa - przerwę ją i wrócę do niej po zakończeniu prezentacji</li>
                         <li>Ta prezentacja jest wersjonowana</li>
                     </ul>
                 </section>
@@ -169,8 +169,7 @@
 
                 <section>
                     <h3>Python</h3>
-                    <pre><code class="python">
-class MyClass(object):
+                    <pre><code class="python">class MyClass(object):
     def method(self, argument):
         return argument
 
@@ -181,35 +180,46 @@ class MyClass(object):
 
                 <section>
                     <h3>Ruby 1</h3>
-                    <pre><code class="ruby">
-class MyClass
+                    <pre><code class="ruby">class MyClass
     def method(argument)
-        argument
+        return argument
     end
 
-    def second
-        method(1)
+    def second()
+        return self.method(1)
     end
 end
 </code></pre></section>
 
                 <section>
                     <h3>Ruby 2</h3>
+                    <pre><code class="ruby">class MyClass
+    def method(argument)
+        argument #!
+    end
+
+    def second()
+        self.method(1) #!
+    end
+end
+</code></pre></section>
+                <section>
+                    <h3>Ruby 3</h3>
                     <pre><code class="ruby">
 class MyClass
     def method argument #!
         argument
     end
 
-    def second
-        method 1 #!
+    def second #!
+        self.method 1 #!
     end
 end
                     </code></pre>
                 </section>
 
                 <section>
-                    <h3>Ruby 3</h3>
+                    <h3>Ruby 4</h3>
                     <pre><code class="ruby">
 class MyClass
     def method argument
@@ -217,7 +227,7 @@ class MyClass
     end
 
     def second
-        self.method 1 #!
+        method 1 #!
     end
 end
                     </code></pre>
@@ -337,11 +347,6 @@ Metoda druga</pre>
                 </section>
 
                 <section>
-                    <h2 style="font-family: arial;">Obiektowość</h2>
-                    <p>Ruby > Python</p>
-                </section>
-
-                <section>
                     <h2 style="font-family: arial;">Obiektowość - dlaczego?</h2>
                     <h3>Ruby</h3>
                     <pre><code class="ruby">array.length</code></pre>
@@ -349,10 +354,37 @@ Metoda druga</pre>
                     <pre><code class="python">len(array)</code></pre>
                 </section>
 
-                                <section>
-                                    <h2>WTF?!</h2>
-                                    <h3>dla programisty Pythona</h3>
-                                </section>
+                <section>
+                    <h2 style="font-family: arial;">Obiektowość</h2>
+                    <p>Ruby > Python</p>
+                </section>
+
+                <section>
+                    <img src="lib/img/spidey.jpg">
+                </section>
+
+                <section>
+                    <h1>Testy?</h1>
+                    <h2>Testy!</h2>
+                    <h3>Testy...</h3>
+                </section>
+
+                <section>
+                    <h3>David Heinemeier Hansson</h3>
+                    <p>
+                        I rarely unit test in the traditional sense of the word, where all dependencies are mocked out, and thousands of tests can close in seconds. It just hasn't been a useful way of dealing with the testing of Rails applications.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Test jednostkowy</h3>
+                    <p>Test jednostkowy (ang. unit test) – w programowaniu metoda testowania tworzonego oprogramowania poprzez wykonywanie testów weryfikujących poprawność działania pojedynczych elementów (jednostek) programu – np. metod lub obiektów w programowaniu obiektowym lub procedur w programowaniu proceduralnym. - wikipedia</p>
+                </section>
+
+                <section>
+                    <h2>WTF?!</h2>
+                    <p>Czyli ból dupy Pythonisty</p>
+                </section>
 
                                 <section>
                                     <h3>Ruby 1</h3>
@@ -400,21 +432,34 @@ irb(main):003:0> puts 3 && 4
                                 </section>
 
                 <section>
-                    <h1>Testy?</h1>
-                    <h2>Testy!</h2>
-                    <h3>Testy...</h3>
+                    <h2>Paczki</h2>
+                    <h3>Framework WWW</h3>
+                    <p class="fragment">Python - Django, Pyramid, Flask oraz wiele innych</p>
+                    <p class="fragment">Ruby - Rails i "jeszcze jeden"</p>
                 </section>
 
                 <section>
-                    <h3>David Heinemeier Hansson</h3>
-                    <p>
-                        I rarely unit test in the traditional sense of the word, where all dependencies are mocked out, and thousands of tests can close in seconds. It just hasn't been a useful way of dealing with the testing of Rails applications.
-                    </p>
+                    <h2>Paczki</h2>
+                    <h3>Autoryzacja</h3>
+                    <p class="fragment">Ruby - Device, Sorcery</p>
+                    <p class="fragment">Python - Django!, ?</p>
                 </section>
 
                 <section>
-                    <h3>Test jednostkowy</h3>
-                    <p>Test jednostkowy (ang. unit test) – w programowaniu metoda testowania tworzonego oprogramowania poprzez wykonywanie testów weryfikujących poprawność działania pojedynczych elementów (jednostek) programu – np. metod lub obiektów w programowaniu obiektowym lub procedur w programowaniu proceduralnym. - wikipedia</p>
+                    <h2>Paczki</h2>
+                    <h3>Okienka</h3>
+                    <p class="fragment">Python - PySide, PyQt, wxWidgets, ...</p>
+                    <p class="fragment">Ruby - ?</p>
+                </section>
+
+                <section>
+                    <h2>Obsługi WWW</h2>
+                    <p>Ruby &gt; Python</p>
+                </section>
+
+                <section>
+                    <h2>Cała reszta</h2>
+                    <p>Ruby &lt; Python</p>
                 </section>
 
 				<section>
