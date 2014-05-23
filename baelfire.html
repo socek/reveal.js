@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+        <style>
+            h1, h2, h3, h4 {
+                font-family: Helvetica !important;
+            }
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Baelfire</h1>
+					<h3>Makefile w Pythonie</h3>
+					<p>
+						<small>Created by <a href="http://socek.org">Socek</a></small>
+					</p>
+				</section>
+
+                <section>
+                    <h3>Po co ta prezentacja?</h3>
+                    <ul>
+                        <li>Czy jest sens?</li>
+                        <li>Czy ktoś mi pomoże? (:</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Po co ten projekt?</h2>
+                    <ul>
+                        <li>Makefile dla projektów pythonowych nie zawsze dawał radę.</li>
+                        <li>Nie znalazłem alternatywy.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Założenia</h3>
+                    <ul>
+                        <li>uruchamianie projektu jedną komendą <small>w granicach rozsądku</small></li>
+                        <li>ściągnięcie wymaganych paczek</li>
+                        <li>reużywalne</li>
+                        <li>konfigurowywalne (settingsy + local.ini)</li>
+                        <li>Odpalanie wielu zadań naraz wraz z argumentami</li>
+                    </ul>
+                </section>
+
+				<section>
+					<h1>Faza Alpha</h1>
+                    <h3 style="color: green;">co jest</h3>
+                    <ul>
+                        <li>System zależności na plikach.</li>
+                        <li>Rysowanie grafu zależności.</li>
+                        <li>Settingsy (bez local.ini).</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Faza Alpha</h1>
+                    <h3 style="color: red;">czego nie ma</h3>
+                    <ul>
+                        <li><strong>Dokumentacji</strong></li>
+                        <li>Parę rzeczy trzeba przemyśleć</li>
+                        <li>Najczęściej używanych recepturek</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Przykładowa recepturka</h3>
+                    <pre><code class="python">01:class ProjectRecipe(Recipe):
+02:
+03:    def create_settings(self):
+04:        self.paths['virtualenv_path'] = 'venv'
+05:        self.paths['setuppy'] = 'setup.py'
+06:        self.paths['src'] = 'src'
+07:        self.paths['project_home'] = ['%(src)s']
+08:        self.paths['flags'] = 'flags'
+09:        self.paths['develop_flag'] = ['%(flags)s', 'develop.flag']
+10:
+11:    def gather_tasks(self):
+12:        self.add_task(Create())
+13:        self.add_task(SetupPy())
+14:        self.add_task(GatherData())</code></pre>
+                </section>
+
+                <section>
+                    <h3>Wytłumaczenie settingsów</h3>
+                    <pre><code class="python">01:settings['flags'] = 'flags'
+02:settings['myflag'] = ['$(flags)s', 'myflag']
+03:print(settings['myflag'])
+-> flags/myglag
+04:settings['flags'] = 'data'
+05:print(settings['myflag'])
+-> data/myglag
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Przykładowy task</h3>
+                    <pre><code class="python">01:class Develop(VirtualenvTask):
+02:    name = 'Setup develop'
+03:    help = 'Run setup.py develop with virtualenv'
+04:
+05:    def get_output_file(self):
+06:        return self.paths['develop_flag']
+07:
+08:    def generate_dependencys(self):
+09:        self.add_dependecy(ParentFileChanged(self.task('/setuppy')))
+10:
+11:    def generate_links(self):
+12:        self.add_link('/create')
+13:        self.add_link('/virtualenv')
+14:
+15:    def make(self):
+16:        self.python('%(setuppy)s develop' % self.paths)
+17:        self.touchme()</code></pre>
+                </section>
+
+                <section>
+                    <h2>Przykład</h2>
+                    <p>pyproject - prosty przykładowy projekt</p>
+                    <pre><code class="bash">socek@sockolap ~  $ pyproject -l
+ Name                 Path           Help
+ ----                 ----           ----
+ Setup develop        /develop       Run setup.py develop with virtualenv
+ Develop with git     /develop/git   Run setup.py develop with virtualenv with git repository
+ Create virtualenv    /virtualenv    Generates virtual envoritment
+ Create               /create        Creates sample python repository
+ Git initial commit   /git           Creates sample python repository with git
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Time for live demo</h1>
+                </section>
+
+				<section>
+					<h1>THE END</h1>
+					<h3>BY Socek</h3>
+                    <img src="lib/koza.jpg">
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
