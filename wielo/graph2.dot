@@ -1,0 +1,14 @@
+digraph {
+	Dziecko[label="Dziecko (0)"];
+	Ciocia[label="Ewa (2)"];
+	Wujek[label="Adam (1)"];
+    Mama[label="Magda (4)"];
+    Tata[label="Paweł (3)"];
+	Dziadek[label="Dziadek (5)"];
+	Wujek -> Dziecko;
+	Tata -> Dziecko;
+	Mama -> Tata;
+	Dziadek -> Mama;
+	Ciocia -> Wujek;
+	Dziadek -> Ciocia;
+}

@@ -1,0 +1,11 @@
+digraph {
+	Dziecko[label="Dziecko (1)"];
+	Wujek[label="Rodzic (3)"];
+    Mock[label="Mock (2)"]
+    Fake[label="Example (0)"]
+
+    Dziecko -> Fake;
+    Mock -> Fake;
+    Wujek -> Mock;
+	Wujek -> Dziecko;
+}

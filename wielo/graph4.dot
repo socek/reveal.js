@@ -1,0 +1,6 @@
+digraph {
+	Dziecko[label="Dziecko (0)"];
+	Wujek[label="Rodzic (1)"];
+
+	Wujek -> Dziecko;
+}

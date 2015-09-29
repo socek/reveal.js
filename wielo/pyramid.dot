@@ -1,0 +1,19 @@
+digraph {
+   Response [label="Response (pyramid)"];
+   Response2 [label="Response (Webob)"];
+	_HTTPMove -> HTTPFound;
+	HTTPRedirection -> _HTTPMove;
+
+	HTTPException -> HTTPRedirection;
+	Exception -> HTTPException;
+	Response -> HTTPException;
+	Callable -> HTTPException;
+	Response2 -> Response;
+	object -> Respone2;
+	Hashable -> object;
+	BaseException -> Exception;
+	object -> BaseException;
+	Iterable -> BaseException;
+	Iterator -> BaseException;
+
+}

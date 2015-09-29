@@ -1,0 +1,6 @@
+digraph {
+	Mama -> Dziecko;
+	Tata -> Dziecko;
+	Dziadek -> Mama;
+	Dziadek -> Tata;
+}
