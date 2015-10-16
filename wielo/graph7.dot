@@ -1,0 +1,17 @@
+digraph {
+    ImpexApplication;
+    HamlApplication;
+    BeakerApplication;
+    SqlAlchemyApplication;
+    FanstaticApplication;
+    AuthApplication;
+    Jinja2Application;
+
+    HamlApplication -> ImpexApplication;
+    BeakerApplication -> ImpexApplication;
+    SqlAlchemyApplication -> ImpexApplication;
+    FanstaticApplication -> ImpexApplication;
+    AuthApplication -> ImpexApplication;
+    Jinja2Application -> HamlApplication;
+    Jinja2Application -> ImpexApplication;
+}
