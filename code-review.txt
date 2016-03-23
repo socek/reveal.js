@@ -1,0 +1,8 @@
+1. Jak reviować -> zadawać pytanie i się uczyć, a nie szukać błędów
+2. Jakich narzędzi użyć? -> tutaj mało mówić, tak ogólnie
+3. Dobre praktyki / złe praktyki
+    - PEP8 FTW!
+    + Chwalenie za jakiś kod.
+4. Najpierw testy a potem code review?
+5. Kiedy robić CR? Na początku, w trakcie, na końcu?
+6. Wysyłający kod powinien pytać.
