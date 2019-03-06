@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Kubernetes dla użytkownika docker swarm</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Kubernetes dla użytkownika docker swarm</h1>
+					<h3></h3>
+					<p>
+						<small>Created by Dominik "Socek" Długajczyk</small>
+					</p>
+				</section>
+
+				<section>
+					<h1>Cel prezentacji</h1>
+					<ul>
+						<li>Wprowadzić w odpowiedni "mindset"</li>
+						<li>Słowniczek pojęć i narzędzi</li>
+						<li>Pokazać najczęstrze problemy</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Docker Swarm</h1>
+					<img src="docker.png">
+				</section>
+
+				<section>
+					<section>
+						<h1>Kubernetes</h1>
+						<img src="kubernetes.png">
+					</section>
+
+					<section>
+						<h1>Stwórz POD</h1>
+						<img src="Step by step - Part1.png">
+					</section>
+
+					<section>
+						<h1>Opakuj go w obiekt</h1>
+						<img src="Step by step - Part2.png">
+					</section>
+
+					<section>
+						<h1>Stwórz obiekt volumena</h1>
+						<img src="Step by step - Part3.png">
+					</section>
+
+					<section>
+						<h1>Stwórz obiekt serwisu</h1>
+						<img src="Step by step - Part4.png">
+					</section>
+
+					<section>
+						<h1>Skonfiguruj Ingress</h1>
+						<img src="Step by step - Part5.png">
+					</section>
+				</section>
+
+				<section>
+
+					<section>
+						<img src="everywhere.png">
+					</section>
+
+					<section>
+						<pre><code class="yaml">apiVersion: v1
+kind: Pod</code></pre>
+					</section>
+
+					<section>
+						<p>Ile jest rodzajów obiektów?</p>
+						<p class="fragment">Nikt nie wie. :(</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h1>Labele</h1>
+						<p>Połącz wszystko ze wszystkim</p>
+					</section>
+					<section>
+						<pre><code class="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: MyServiceBackend-asdasdas
+  labels:
+    app.kubernetes.io/name: MyServiceBackend-backend
+    helm.sh/chart: MyServiceChart
+    app.kubernetes.io/instance: MyServiceBackend-asdasdas-backend
+    app.kubernetes.io/managed-by: helm
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: MyServiceBackend-backend
+    app.kubernetes.io/instance: MyServiceBackend-asdasdas-backend
+  </code>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Co trzeba wiedzieć</h1>
+					</section>
+
+					<section>
+						<h1>Namespace</h1>
+						<p>Grupa konfiguracyjna</p>
+					</section>
+
+					<section>
+						<h1>Unikalność nazw</h1>
+					</section>
+
+					<section>
+						<h1>Deploy jest asynchroniczny</h1>
+						<p>Czyli puszczasz i czekasz, aż coś zwróci:<br>"wszystko jest OK"</p>
+					</section>
+
+					<section>
+						<h1>Szukanie błędów</h1>
+						<p>Szukanie igły w stogu siana</p>
+					</section>
+
+					<section>
+						<h1>Volumeny</h1>
+						<p>Ilość typów: <span class="fragment">27</span></p>
+						<div class="fragment">
+							<h3>Najważniejsze</h3>
+							<ul>
+								<li>emptyDir</li>
+								<li>persistentVolumeClaim</li>
+							</ul>
+						</div>
+					</section>
+
+					<section>
+						<h1>Konfiguracja clastra</h1>
+						<p>Przed deployem, trzeba skonfigurować claster, np. dodać dane do rejestru</p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h1>Narzędzia</h1>
+					</section>
+
+					<section>
+						<img src="kubernetes-logo.png">
+					</section>
+
+					<section>
+						<img src="helm.png">
+						<ul>
+							<li>Zamiana wartości na zmienne</li>
+							<li>Możliwość używania gotowych chartów, np. PostgreSQL-ha</li>
+							<li>Łatwiejszy deployment</li>
+						</ul>
+					</section>
+
+					<section>
+						<pre><code class="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: MyServiceBackend-asdasdas
+  labels:
+    app.kubernetes.io/name: MyServiceBackend-backend
+    helm.sh/chart: MyServiceChart
+    app.kubernetes.io/instance: MyServiceBackend-asdasdas-backend
+    app.kubernetes.io/managed-by: helm
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: MyServiceBackend-backend
+    app.kubernetes.io/instance: MyServiceBackend-asdasdas-backend
+  </code>
+					</section>
+
+					<section>
+						<pre><code class="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "myname.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "myname.name" . }}-backend
+    helm.sh/chart: {{ include "myname.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}-backend
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.air.backend.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "myname.name" . }}-backend
+    app.kubernetes.io/instance: {{ .Release.Name }}-backend
+
+  </code>
+					</section>
+
+					<section>
+						<img src="minikube-logo.jpg">
+					</section>
+
+					<section>
+						<img src="kubernetes-dashboard.png">
+					</section>
+
+					<section>
+						<img src="telepresence.io.svg">
+						<p>telepresence.io</p>
+					</section>
+
+					<section>
+						<img src="k9s.png">
+						<p>k9s</p>
+					</section>
+
+				</section>
+
+				<section>
+					<img src="end.gif">
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
