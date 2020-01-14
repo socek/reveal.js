@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Kubernetes dla użytkownika docker swarm</title>
+		<title>Kubernetes for docker users</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -41,7 +41,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Kubernetes dla użytkownika dockera</h1>
+					<h1>Kubernetes for docker users</h1>
 					<h3></h3>
 					<p>
 						<small>Created by Dominik "Socek" Długajczyk</small>
@@ -49,11 +49,11 @@
 				</section>
 
 				<section>
-					<h1>Cel prezentacji</h1>
+					<h1>Goals of this presentation</h1>
 					<ul>
-						<li>Wprowadzić w odpowiedni "mindset"</li>
-						<li>Słowniczek pojęć i narzędzi</li>
-						<li>Pokazać najczęstrze problemy</li>
+						<li>Introduce into the appropriate mindset</li>
+						<li>Glossary of terms and tools</li>
+						<li>Show the most common problems</li>
 					</ul>
 				</section>
 
@@ -69,27 +69,27 @@
 					</section>
 
 					<section>
-						<h1>Stwórz POD</h1>
+						<h1>Create a POD</h1>
 						<img src="Step by step - Part1.png">
 					</section>
 
 					<section>
-						<h1>Opakuj go w obiekt</h1>
+						<h1>Wrap it in an object</h1>
 						<img src="Step by step - Part2.png">
 					</section>
 
 					<section>
-						<h1>Stwórz obiekt volumena</h1>
+						<h1>Create a volumen</h1>
 						<img src="Step by step - Part3.png">
 					</section>
 
 					<section>
-						<h1>Stwórz obiekt serwisu</h1>
+						<h1>Create a service</h1>
 						<img src="Step by step - Part4.png">
 					</section>
 
 					<section>
-						<h1>Skonfiguruj Ingress</h1>
+						<h1>Configure Ingress</h1>
 						<img src="Step by step - Part5.png">
 					</section>
 				</section>
@@ -106,16 +106,16 @@ kind: Pod</code></pre>
 					</section>
 
 					<section>
-						<p>Ile jest rodzajów obiektów?</p>
-						<p class="fragment">Nikt nie wie. :(</p>
+						<p>How many types of objects are there?</p>
+						<p class="fragment">Nobody knows. :(</p>
 					</section>
 
 				</section>
 
 				<section>
 					<section>
-						<h1>Labele</h1>
-						<p>Połącz wszystko ze wszystkim</p>
+						<h1>Labels</h1>
+						<p>Connect everything with everything</p>
 					</section>
 					<section>
 						<pre><code class="yaml">apiVersion: v1
@@ -138,33 +138,33 @@ spec:
 
 				<section>
 					<section>
-						<h1>Co trzeba wiedzieć</h1>
+						<h1>What you need to know</h1>
 					</section>
 
 					<section>
 						<h1>Namespace</h1>
-						<p>Grupa konfiguracyjna</p>
+						<p>Configuration group</p>
 					</section>
 
 					<section>
-						<h1>Unikalność nazw</h1>
+						<h1>The uniqueness of the names</h1>
 					</section>
 
 					<section>
-						<h1>Deploy jest asynchroniczny</h1>
-						<p>Czyli puszczasz i czekasz, aż coś zwróci:<br>"wszystko jest OK"</p>
+						<h1>Deploy is asynchronous</h1>
+						<p>So you start the command and wait for Kubernetes to show:<br /> "everything is ok".</p>
 					</section>
 
 					<section>
-						<h1>Szukanie błędów</h1>
-						<p>Szukanie igły w stogu siana</p>
+						<h1>Error searching</h1>
+						<p>Needle search in a haystack</p>
 					</section>
 
 					<section>
-						<h1>Volumeny</h1>
-						<p>Ilość typów: <span class="fragment">27</span></p>
+						<h1>Volumens</h1>
+						<p>Number of types: <span class="fragment">27</span></p>
 						<div class="fragment">
-							<h3>Najważniejsze</h3>
+							<h3>Most important</h3>
 							<ul>
 								<li>emptyDir</li>
 								<li>persistentVolumeClaim</li>
@@ -173,15 +173,15 @@ spec:
 					</section>
 
 					<section>
-						<h1>Konfiguracja clastra</h1>
-						<p>Przed deployem, trzeba skonfigurować claster, np. dodać dane do rejestru</p>
+						<h1>Configuration of cluster</h1>
+						<p>Before deploying, you need to configure cluster, e.g. add data to the registry</p>
 					</section>
 
 				</section>
 
 				<section>
 					<section>
-						<h1>Narzędzia</h1>
+						<h1>Tools</h1>
 					</section>
 
 					<section>
@@ -191,10 +191,10 @@ spec:
 					<section>
 						<img src="helm.png">
 						<ul>
-							<li>Zamiana wartości na zmienne</li>
-							<li>Możliwość używania gotowych chartów, np. PostgreSQL-ha</li>
-							<li>Łatwiejszy deployment</li>
-							<li>Najlepsza tandeta na rynku!</li>
+							<li>Replacing raw values with variables</li>
+							<li>Possibility to use ready-made greyhounds, e.g. PostgreSQL-ha</li>
+							<li>Easier deployment</li>
+							<li class="fragment">The best trash on the market!</li>
 						</ul>
 					</section>
 
@@ -236,6 +236,16 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "myname.name" . }}-backend
     app.kubernetes.io/instance: {{ .Release.Name }}-backend
+  spec:
+    {{ if and (.Values.postgresql.backup.enabled) (not .Values.postgresql.recovery.enabled) -}}
+    something: up
+  {{ toYaml .Values.resources | indent 12 }}
+    data:
+    {{- range $key, $value := .Values.extraEnv }}
+    - name: {{ $key }}
+      value: "{{ $value }}"
+    {{- end }}
+   {{ end }}
 
   </code>
 					</section>
@@ -248,11 +258,6 @@ spec:
 					<section>
 						<img src="kubernetes-dashboard.png">
 						<p>Kubernetes Dashboard</p>
-					</section>
-
-					<section>
-						<img src="telepresence.io.svg">
-						<p>telepresence.io</p>
 					</section>
 
 					<section>
