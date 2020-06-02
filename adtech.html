@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Czy Google mnie szpieguje i wie o czym rozmawiam?</h1>
+					<h3>Czyli co Google o mnie wie i jak mnie szpieguje</h3>
+					<p>
+						<small>Dominik "Socek" Długajczyk</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h1>Disclaimer</h1>
+					<ul>
+						<li>Będę opowiadał o tym co wiem, ale nie wiem wszystkiego.</li>
+						<li>Zamiast "Google/FB/inni" będę używał skrótu "AdTech"</li>
+						<li>Przerywajcie i pytajcie</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h1>Jak spytać AdTech co o mnie wie?</h1>
+						<p class="fragment">Zapytajmy google</p>
+					</section>
+					<section>
+						<h1>Ile AdTech może z tego wykorzystać?</h1>
+						<p class="fragment">Bardzo mało</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Jak to kiedyś wyglądało?</h1>
+					</section>
+
+					<section>
+						<img src="adtech/adtech.png">
+					</section>
+
+					<section>
+						<img src="adtech/Adservingfull.svg">
+					</section>
+
+					<section>
+						<img src="https://media.tenor.com/images/4558821324a1d127c8a0a5aa699d281c/tenor.gif">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Tracking Pixel</h1>
+						<img class="fragment" src="adtech/adtech-Page-2.png">
+					</section>
+
+					<section>
+						<h1>Co ma w sobie request?</h1>
+						<ul>
+							<li>Adres IP</li>
+							<li>Przeglądarkę</li>
+							<li>Czas wizyty</li>
+							<li>Skąd przyszliśmy</li>
+						</ul>
+					</section>
+
+					<section>
+						<h1>Więcej pixeli - reakcja na zdarzenia</h1>
+						<ul>
+							<li>Zobaczyłem coś (np. reklamę)</li>
+							<li>Zakupiłem coś</li>
+							<li>Wypełniłem formularz lub pole</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h1>Jak te dane połączyć?</h1>
+						<p>Metod jest wiele</p>
+					</section>
+
+					<section>
+						<h1>Ciasteczka - cookies</h1>
+						<p>Pytanie o ciasteczka, czyli wylewanie dziecka z kąpielom</p>
+					</section>
+
+					<section>
+						<h1>Cache</h1>
+						<p>Czyli sprytny sposób wykorzystywania powszechnych mechanizmów</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Mamy te wszystkie dane, ale co z nimi zrobić?</h1>
+					</section>
+
+					<section>
+						<h1>Statystyka</h1>
+						<h2>Janina Bąk</h2>
+						<img src="https://sprawnymarketing.pl/wp-content/uploads/2018/10/0-3.png">
+					</section>
+
+					<section>
+						<img src="https://i.ytimg.com/vi/VV7Yj0P04sQ/maxresdefault.jpg">
+					</section>
+
+					<section>
+						<h1>Machine Learning</h1>
+						<p>Pattern matching czyli odpowiednia duża próbka, żeby móc porównać</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>GDPR</h1>
+						<h3 class="fragment">RODO</h3>
+						<p class="fragment"><small>RODO SRODO</small></p>
+					</section>
+
+					<section>
+						<h1>Co to oznacza?</h1>
+						<ul>
+							<li>Strony nie mogą cię śledzić bez twojej wiedzy</li>
+							<li class="fragment">Ani trzymać twoich danych bez twojej wiedzy</li>
+							<li class="fragment">W sumie to nie mogą normalnie działać bez pozwolenia</li>
+						</ul>
+					</section>
+
+					<section>
+						<h1>Wyjście na miasto z bazooką</h1>
+						<h2 class="fragment">Aby napaść na bank</h2>
+						<h3 class="fragment">Na bank spermy</h3>
+						<h4 class="fragment">Aby ukraść kwiatka</h4>
+					</section>
+
+					<section>
+						<h1>Efekt</h1>
+						<ul>
+							<li>Ludzie nie rozumieją jak działa RODO</li>
+							<li>Firmy też się boją</li>
+							<li>Firmy z poza UE blokują usługi dla ludzi z UE</li>
+						</ul>
+					</section>
+
+					<section>
+						<h1>Jedna pozytywna zasada</h1>
+						<h2>Usunięcie własnych danych</h2>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Jak się chronić?</h1>
+					</section>
+
+					<section>
+						<img src="https://media3.giphy.com/media/Ll2fajzk9DgaY/200.gif">
+					</section>
+
+					<section>
+						<h1>Jak zminimalizować?</h1>
+						<ul>
+							<li>Wyłączyć cookies</li>
+							<li>Wyłączyć obrazki</li>
+							<li>Używać VPNa</li>
+							<li>Używać Private Browsing</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h1>Zatem czy AdTech mnie podsłuchuje?</h1>
+					<p class="fragment">Nie wiem, lecz wydaje mi się, że nie.</p>
+				</section>
+
+				<section>
+					<h1>THE END</h1>
+					<h3>BY Socek</h3>
+                    <img src="lib/koza.jpg">
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
